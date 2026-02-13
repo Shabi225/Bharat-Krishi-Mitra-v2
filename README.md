@@ -13,11 +13,11 @@ Core Features:
 - Offline PWA support - **Planned**
 
 🛠️ Tech Stack
-Frontend: HTML5, CSS3, JavaScript (Vanilla), Bootstrap
-Backend: Node.js/Express, REST APIs, PostgreSQL - **Future**
-Data: JSON schemes database
-Deployment: GitHub Pages (static), Vercel/Netlify support
-Future: Blockchain verification layer
+1. Frontend: HTML5, CSS3, JavaScript (Vanilla), Bootstrap
+2. Backend: Node.js/Express, REST APIs, PostgreSQL - **Future**
+3. Data: JSON schemes database
+4. Deployment: GitHub Pages (static), Vercel/Netlify support
+5. Future: Blockchain verification layer
 
 
 📋 Setup Instructions
@@ -59,15 +59,14 @@ cd Bharat-Krishi-Mitra-v2
 🚀 Future Roadmap
 
 Phase 3: Voice Features 
-├── Text-to-Speech (scheme reading)
-├── Speech-to-Text (voice search)
-├── User authentication
-├── Admin dashboard
-Advanced Features (Q4 2026)
-├── Blockchain verification layer
-│   └── Scheme eligibility proof
-├── Real-time scheme updates
-├── Farmer profile & history
+- Text-to-Speech (scheme reading)
+- Speech-to-Text (voice search)
+- User authentication
+- Admin dashboard
+- Blockchain verification layer
+  └── Scheme eligibility proof
+- Real-time scheme updates
+- Farmer profile & history
 
 
 🤝 Contributing
