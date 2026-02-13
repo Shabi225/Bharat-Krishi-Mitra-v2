@@ -1,107 +1,292 @@
-/* Reset */
+/* RESET */
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
 }
 
-/* Background Image */
+/* BACKGROUND WITH DARK OVERLAY */
 body{
     height:100vh;
-    background: url("../images/farmer.png") no-repeat center center/cover;
+
+    background:
+    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+    url("../images/signin.png") no-repeat center center/cover;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    animation: backgroundZoom 15s infinite alternate ease-in-out;
+}
+
+/* subtle zoom animation */
+@keyframes backgroundZoom{
+    from{
+        background-size:100%;
+    }
+    to{
+        background-size:110%;
+    }
+}
+
+
+/* MAIN CONTAINER */
+.main-container{
+    width:100%;
     display:flex;
     justify-content:center;
     align-items:center;
 }
 
-/* Main Container */
-.main-container{
-    width:100%;
-    display:flex;
-    justify-content:center;
-    padding-right:80px;
-}
 
-/* Login Card */
+/* FLOATING CARD */
 .login-card{
-    width:350px;
-    background:white;
-    padding:30px;
-    border-radius:15px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+
+    width:360px;
+
+    background: rgba(255,255,255,0.12);
+
+    backdrop-filter: blur(15px);
+
+    border-radius:18px;
+
+    padding:35px;
+
+    border:1px solid rgba(255,255,255,0.25);
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.4);
+
+    animation: floatCard 4s ease-in-out infinite,
+               fadeIn 1s ease;
+
+    transition:0.4s;
 }
 
-/* Logo Section */
+
+/* floating animation */
+@keyframes floatCard{
+
+    0%{
+        transform: translateY(0px);
+    }
+
+    50%{
+        transform: translateY(-10px);
+    }
+
+    100%{
+        transform: translateY(0px);
+    }
+
+}
+
+
+/* fade animation */
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform: translateY(40px);
+    }
+
+    to{
+        opacity:1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* hover glow */
+.login-card:hover{
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,0.5),
+    0 0 20px rgba(76,175,80,0.4);
+
+}
+
+
+/* LOGO SECTION */
 .logo-section{
     text-align:center;
     margin-bottom:20px;
 }
 
 .logo-section img{
+
     width:80px;
-    margin-bottom:10px;
+
+    animation: logoRotate 6s infinite linear;
+
+}
+
+/* slow rotate */
+@keyframes logoRotate{
+
+    from{
+        transform: rotate(0deg);
+    }
+
+    to{
+        transform: rotate(360deg);
+    }
+
 }
 
 .logo-section h2{
-    color:#333;
+
+    color:white;
+
+    margin-top:10px;
+
+    letter-spacing:1px;
 }
 
-/* Form */
+
+/* FORM */
 form{
     display:flex;
     flex-direction:column;
 }
 
-form label{
-    font-size:14px;
-    margin-top:10px;
-    color:#555;
-}
 
+/* INPUT */
 form input{
-    padding:12px;
-    margin-top:10px;
-    border:1px solid #ccc;
-    border-radius:8px;
-    outline:none;
-    transition:0.3s;
-}
 
-form input:focus{
-    border-color:#2e7d32;
-}
+    padding:13px;
 
-/* Button */
-button{
-    margin-top:20px;
-    margin-bottom:20px;
-    padding:12px;
-    background:#2e7d32;
-    color:white;
+    margin-top:12px;
+
     border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:16px;
+
+    border-radius:10px;
+
+    outline:none;
+
+    background: rgba(255,255,255,0.9);
+
+    font-size:15px;
+
     transition:0.3s;
+}
+
+
+/* input animation */
+form input:focus{
+
+    transform: scale(1.04);
+
+    box-shadow: 0 0 10px rgba(76,175,80,0.6);
+
+}
+
+
+/* BUTTON */
+button{
+
+    margin-top:20px;
+
+    padding:13px;
+
+    border:none;
+
+    border-radius:10px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    color:white;
+
+    background: linear-gradient(45deg,#4CAF50,#2e7d32);
+
+    cursor:pointer;
+
+    transition:0.4s;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+
+/* button shine effect */
+button::before{
+
+    content:"";
+
+    position:absolute;
+
     width:100%;
+
+    height:100%;
+
+    top:0;
+
+    left:-100%;
+
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.4),
+        transparent
+    );
+
+    transition:0.5s;
 }
 
+button:hover::before{
+
+    left:100%;
+
+}
+
+
+/* button hover */
 button:hover{
-    background:#1b5e20;
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+
 }
 
-/* Links */
+
+/* LINKS */
 .extra-links{
-    margin-top:15px;
-    font-size:13px;
+
+    margin-top:18px;
+
+    text-align:center;
+
+    color:white;
+
+    font-size:14px;
+
 }
+
 
 .extra-links a{
+
+    color:#a5d6a7;
+
     text-decoration:none;
-    color:#2e7d32;
+
+    font-weight:bold;
+
+    transition:0.3s;
 }
 
+
+/* glowing link hover */
 .extra-links a:hover{
-    text-decoration:underline;
+
+    color:white;
+
+    text-shadow:0 0 10px #4CAF50;
+
 }
