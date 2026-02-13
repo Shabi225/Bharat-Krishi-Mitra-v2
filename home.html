@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bharat Krishi Mitra</title>
+  
+  
+  <link rel="stylesheet" href="./styles/home.css">
+ 
+  <script defer src="./home.js"></script>
+</head>
+
+<body>
+
+<header>
+  <div class="logo-container">
+    <img src="./images/logo.png" alt="Logo">
+    <span class="brand-name">Bharat Krishi Mitra</span>
+  </div>
+
+  <div class="header-right">
+  <button class="signup-btn"
+        onclick="enableVoice(); speakSignup(); window.location.href='./signin.html';"
+        onmouseenter="speakSignup()"
+        onmouseleave="resetSignupVoice()">
+  Sign Up
+  </button>
+
+
+    <select id="language" onchange="updateHeroText()">
+      <option value="hi-IN">हिन्दी</option>
+      <option value="en-US">English</option>
+      <option value="bn-IN">বাংলা</option>
+    </select>
+
+   
+    <button class="icon-btn" onclick="speakWelcome()">🔊</button> 
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  </div>
+</header>
+
+<!-- MENU -->
+<div class="menu-panel" id="menu">
+  <a href="#" onclick="scrollToHome()">🏠 Home</a>
+  <a href="#" onclick="scrollToAbout()">ℹ️ About</a>
+  <a href="schemes.html">📜 Schemes</a>
+  <a href="weather.html">🌦 Weather Update</a>
+  <a href="#" onclick="scrollToContact()">☎ Contact Us</a>
+</div>
+
+
+<!-- AUDIO -->
+<audio id="bgAudio" loop>
+  <source src="audio.mp3" type="audio/mpeg">
+</audio>
+<div id="audioControl" onclick="toggleAudio()">🔊</div>
+
+<!-- VIDEO -->
+<section class="home-section">
+<div class="video-container">
+  <video autoplay muted loop>
+    <source src="./images/backgroundvid.mp4" type="video/mp4">
+  </video>
+
+  <!-- 🌟 CENTER HERO TEXT -->
+  <div class="hero-overlay hero-animate" id="heroBox">
+    <h1 id="hero-title"></h1>
+    <p id="hero-line1"></p>
+    <p id="hero-line2"></p>
+    <p id="hero-line3" class="highlight"></p>
+  </div>
+</div>
+</section>
+
+<!--  FULL SCREEN ABOUT SECTION -->
+<section class="about-fullscreen" id="about">
+  <div class="about-box">
+    <!-- LEFT TEXT -->
+    <div class="about-left">
+      <h2>For Every Indian Farmer 🌾</h2>
+      <p>
+        Farming is not just work — it’s a way of life.
+        Bharat Krishi Mitra stands beside you with trusted,
+        simple and timely farming guidance.
+      </p>
+
+      <p>
+        From weather alerts to government schemes,
+        from smart techniques to local language support —
+        everything is built for <strong>you</strong>.
+      </p>
+
+      <p class="about-highlight">
+        Smart farming starts with the right information.
+      </p>
+    </div>
+
+    <!-- RIGHT IMAGE SLIDESHOW -->
+    <!-- RIGHT IMAGE CAROUSEL WITH ARROWS -->
+<div class="about-right">
+  <div class="carousel">
+    
+    
+    <div class="carousel-track-wrapper">
+      <div class="carousel-track">
+        <img src="./images/farmer1.jpg" alt="Farmer 1">
+        <img src="./images/farmer2.jpg" alt="Farmer 2">
+        <img src="./images/farmer3.avif" alt="Farmer 3">
+        <img src="./images/farmer4.jpg" alt="Farmer 4">
+        <img src="./images/farmer5.jpg" alt="Farmer 5">
+        <img src="./images/farmer6.webp" alt="Farmer 6">
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+  </div>
+</section>
+
+<!-- FOOTER SECTION -->
+<footer class="footer" id="contact">
+  <div class="footer-container">
+    <!-- LEFT: About -->
+    <div class="footer-about">
+      <h3>Bharat Krishi Mitra</h3>
+      <p>
+        Providing trusted guidance to Indian farmers 🌾.  
+        From weather alerts to smart farming tips, everything you need is here.
+      </p>
+    </div>
+
+    <!-- CENTER: Quick Links -->
+    <div class="footer-links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#">Schemes</a></li>
+        <li><a href="weather.html">Weather Update</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- RIGHT: Contact & Social -->
+    <div class="footer-contact">
+      <h3>Contact Us</h3>
+      <p>📞 +91 98765 43210</p>
+      <p>✉️ info@bharatkrishimitra.com</p>
+      <div class="footer-social">
+        <a href="#" target="_blank">🌐</a>
+        <a href="#" target="_blank">📱</a>
+        <a href="#" target="_blank">💬</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    &copy; 2026 Bharat Krishi Mitra. All Rights Reserved.
+  </div>
+</footer>
+
+
+
+
+</body>
+</html>
