@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farmer Weather Dashboard</title>
+    <!-- Google Translate Widget -->
+  <script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'hi',
+      includedLanguages: 'en,hi,bn',
+      layout: google.translate.TranslateElement.InlineLayout.DROPDOWN,
+      multilanguagePage: true
+    }, 'google_translate_element');
+  }
+  </script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  
+  <link rel="stylesheet" href="./styles/weather.css">
+  <script defer src="./weather.js"></script>
+</head>
+
+<body>
+
+
+  
+  <header class="main-header">
+  
+  <!-- NEW: Nav + Translate -->
+  <nav class="top-nav">
+    <h3>🌾 Smart Farming Weather & Crop Dashboard</h3>
+    <div class="nav-dropdown">
+      <button class="nav-dropbtn" onclick="toggleNavMenu()">☰ मेनू</button>
+      <div class="nav-content" id="navMenu">
+        <a href="index.html">होम</a>
+        <a href="schemes.html">योजनाएँ</a>
+        <a href="weather.html" class="active">मौसम</a>
+      </div>
+    </div>
+    
+    <div id="google_translate_element" class="lang-dropdown"></div>
+  </nav>
+
+
+</header>
+
+<div class="container">
+
+  <label>Select Location:</label>
+  <select id="city">
+    <option value="Ashta">Aashtaa</option>
+    <option value="Bhopal">Bhopal</option>
+    <option value="Sehore">Sehore</option>
+    <option value="Indore">Indore</option>
+  </select>
+
+  <label>Select Season:</label>
+  <select id="season">
+    <option value="Kharif">Kharif</option>
+    <option value="Rabi">Rabi</option>
+    <option value="Zaid">Zaid</option>
+  </select>
+
+  <button onclick="detectLocation()">Auto Detect My District</button>
+  <button onclick="getWeather()">Check Weather</button>
+
+  <div id="alertBox"></div>
+
+  <div class="top-section">
+    <div class="card" id="currentWeather"></div>
+    <div class="card" id="advisory"></div>
+  </div>
+
+  <div class="card" id="cropSuggestion" style="margin-top:20px;"></div>
+
+  <div class="bottom-section">
+    <h3>5-Day Forecast</h3>
+    <div class="forecast-strip" id="forecast"></div>
+
+    <h3>Next 24 Hours (Spray Window)</h3>
+    <table class="hourly-table" id="hourly"></table>
+  </div>
+
+</div>
+
+</body>
+</html>

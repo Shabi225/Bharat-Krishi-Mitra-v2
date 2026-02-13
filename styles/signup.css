@@ -1,0 +1,107 @@
+/* Reset */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Background */
+body{
+    height:100vh;
+    background: url("../images/farmer.png") no-repeat center center/cover;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Container */
+.main-container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:80px;
+}
+
+/* Signup Card */
+.signup-card{
+    width:380px;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* Logo */
+.logo-section{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.logo-section img{
+    width:80px;
+    margin-bottom:10px;
+}
+
+.logo-section h2{
+    color:#333;
+}
+
+/* Form */
+form{
+    display:flex;
+    flex-direction:column;
+}
+
+form label{
+    margin-top:10px;
+    font-size:14px;
+    color:#555;
+}
+
+form input{
+    padding:12px;
+    margin-top:5px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    outline:none;
+    transition:0.3s;
+}
+
+form input:focus{
+    border-color:#2e7d32;
+}
+
+/* Button */
+button{
+    margin-top:20px;
+    margin-bottom: 10px;
+    padding:12px;
+    background:#2e7d32;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#1b5e20;
+}
+
+/* Links */
+.extra-links{
+    margin-top:15px;
+    text-align:center;
+    font-size:14px;
+}
+
+.extra-links a{
+    text-decoration:none;
+    color:#2e7d32;
+}
+
+.extra-links a:hover{
+    text-decoration:underline;
+}

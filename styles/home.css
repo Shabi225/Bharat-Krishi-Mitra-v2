@@ -1,0 +1,611 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body, html {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+/* ================= BEAUTIFUL HEADER ================= */
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 75px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  transition: all 0.4s ease;
+
+  z-index: 1000;
+}
+
+/* When scrolling */
+header.scrolled {
+  background: rgba(20, 82, 20, 0.85);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+header.hide-header {
+  opacity: 0;
+  pointer-events: none;
+  backdrop-filter: blur(0);
+}
+
+
+/* LOGO */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.logo-container img {
+  height: 50px;
+  transition: transform 0.4s ease;
+}
+
+.logo-container:hover img {
+  transform: rotate(-5deg) scale(1.05);
+}
+
+
+.brand-name {
+  font-size: 24px;
+  font-weight: 800;
+  background: linear-gradient(45deg, #a5ff9e, #4CAF50, #ffd54f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+}
+
+
+/* HEADER RIGHT */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+select, .icon-btn {
+  padding: 6px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.icon-btn {
+  background: white;
+}
+
+/* SIGN UP BUTTON */
+.signup-btn {
+  background: linear-gradient(45deg, #e53935, #ff7043);
+  color: white;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(229, 57, 53, 0.4);
+}
+
+.signup-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(229, 57, 53, 0.6);
+}
+
+
+/* MENU BUTTON */
+.menu-btn {
+  font-size: 26px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* MENU PANEL */
+.menu-panel {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  width: 220px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  display: none;
+  z-index: 2000;
+}
+
+.menu-panel.active {
+  display: block;
+}
+
+.menu-panel a {
+  display: block;
+  padding: 12px 10px;
+  font-size: 17px;
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.menu-panel a:hover {
+  color: #2e7d32;
+  font-weight: bold;
+  text-decoration: underline;
+  background: rgba(76, 175, 80, 0.1);
+  border-radius: 6px;
+}
+
+/* VIDEO */
+.video-container {
+  height: 100vh;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* AUDIO CONTROL */
+#audioControl {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: white;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1500;
+}
+/* ================= CENTER HERO TEXT ================= */
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  color: white;
+  z-index: 2;
+}
+
+
+.hero-overlay h1 {
+  font-size: 52px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #a5ff9e;
+  max-width: 900px;
+}
+
+.hero-overlay p {
+  font-size: 22px;
+  margin: 10px 0;
+  max-width: 900px;
+  line-height: 1.5;
+}
+
+.hero-overlay .highlight {
+  margin-top: 18px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffd54f;
+}
+/* ================= HERO ANIMATION ================= */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-animate h1,
+.hero-animate p {
+  animation: fadeUp 1.2s ease forwards;
+  opacity: 0;
+}
+
+.hero-animate h1 {
+  animation-delay: 0.2s;
+}
+
+.hero-animate p:nth-of-type(1) {
+  animation-delay: 0.6s;
+}
+
+.hero-animate p:nth-of-type(2) {
+  animation-delay: 1s;
+}
+
+.hero-animate p.highlight {
+  animation-delay: 1.4s;
+}
+/* FULL SCREEN ABOUT PAGE */
+.about-fullscreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(120deg, #4dbddf, #f1fff1);
+}
+
+.about-box {
+  display: flex;
+  width: 80%;
+  height: 70%;
+  background: #f1fff1;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  overflow: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.about-box:hover {
+  background: #1b5e20; /* dark green */
+  color: #fff;
+}
+
+.about-box:hover h2,
+.about-box:hover p,
+.about-box:hover .about-highlight {
+  color: #fff;
+}
+
+/* LEFT SIDE */
+.about-left {
+  width: 50%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+}
+
+.about-left h2 {
+  font-size: 32px;
+  color: #1b5e20;
+  transition: color 0.3s ease;
+}
+
+.about-left p {
+  font-size: 18px;
+  color: #2f4f2f;
+  line-height: 1.6;
+  transition: color 0.3s ease;
+}
+
+.about-highlight {
+  font-weight: bold;
+  color: #2e7d32;
+  font-size: 20px;
+  transition: color 0.3s ease;
+}
+
+/* RIGHT SIDE IMAGE */
+.about-right {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e0f2f1;
+  transition: background 0.3s ease;
+}
+
+.about-box:hover .about-right {
+  background: #145214; 
+}
+
+/* ✨ ANIMATION */
+@keyframes slideFadeLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.home-section {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+html {
+  scroll-behavior: smooth;
+}
+ 
+body {
+  scroll-snap-type: y mandatory;
+}
+
+.home-section,
+.about-fullscreen {
+  scroll-snap-align: start;
+  height: 100vh;
+}
+/* RIGHT SIDE CAROUSEL */
+.about-right {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e0f2f1; 
+}
+
+.about-box:hover .about-right {
+  background: #145214; 
+}
+
+
+/* FOOTER */
+/* ================= PREMIUM FOOTER ================= */
+
+.footer {
+  scroll-snap-align: start;
+  background: linear-gradient(135deg, #0f3d0f, #145214, #1b5e20);
+  color: #fff;
+  padding: 60px 40px 25px;   /* reduced padding */
+  position: relative;
+  overflow: hidden;
+}
+
+
+/* subtle glow effect */
+.footer::before {
+  content: "";
+  position: absolute;
+  top: -150px;
+  left: -150px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(165,255,158,0.2), transparent 70%);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.footer-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* ================= HEADINGS ================= */
+
+.footer h3 {
+  font-size: 22px;
+  margin-bottom: 18px;
+  color: #a5ff9e;
+  position: relative;
+}
+
+.footer h3::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: #ffd54f;
+  margin-top: 8px;
+  border-radius: 5px;
+}
+
+/* ================= ABOUT ================= */
+
+.footer-about p {
+  line-height: 1.8;
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+/* ================= LINKS ================= */
+
+.footer-links ul {
+  list-style: none;
+}
+
+.footer-links ul li {
+  margin-bottom: 12px;
+}
+
+.footer-links ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.footer-links ul li a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  left: 0;
+  bottom: -4px;
+  background: #ffd54f;
+  transition: width 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+  color: #ffd54f;
+}
+
+.footer-links ul li a:hover::after {
+  width: 100%;
+}
+
+/* ================= CONTACT ================= */
+
+.footer-contact p {
+  margin-bottom: 10px;
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+/* ================= SOCIAL ICONS ================= */
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin-right: 12px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(6px);
+  font-size: 18px;
+  color: #fff;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.footer-social a:hover {
+  background: #ffd54f;
+  color: #145214;
+  transform: translateY(-4px) scale(1.1);
+  box-shadow: 0 6px 20px rgba(255,213,79,0.6);
+}
+
+/* ================= FOOTER BOTTOM ================= */
+
+.footer-bottom {
+  margin-top: 60px;
+  padding-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  opacity: 0.8;
+}
+.footer-container > div {
+  transition: transform 0.4s ease;
+}
+
+.footer-container > div:hover {
+  transform: translateY(-8px);
+}
+
+/* MANUAL CAROUSEL WITH ARROWS */
+/* RIGHT SIDE CAROUSEL */
+.about-right {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e0f2f1;
+}
+
+/* Fixed-size carousel box */
+.carousel {
+  position: relative;
+  width: 90%;
+  max-width: 420px;
+  height: 260px;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Wrapper just hides overflow */
+.carousel-track-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Track: 6 “pages” horizontally */
+.carousel-track {
+  display: flex;
+  height: 100%;
+  /* width will be auto = 6 * 100% because of flex children */
+  transition: transform 0.4s ease-in-out;
+}
+
+/* Each image is exactly one full slide */
+.carousel-track img {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* fills box, no black screen */
+}
+
+
+
+/* Arrow buttons unchanged */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+  z-index: 3;
+}
+
+.carousel-btn:hover {
+  background: rgba(0,0,0,0.8);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.carousel-btn.prev {
+  left: 10px;
+}
+
+.carousel-btn.next {
+  right: 10px;
+}
+
