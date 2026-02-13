@@ -5,7 +5,7 @@ const CARDS_PER_PAGE = 6;
 
 async function loadSchemes() {
   try {
-    const response = await fetch('schemes.json');
+    const response = await fetch('schemes.JSON');
     const data = await response.json();
     allSchemes = data.schemes || [];
     if (allSchemes.length > 0) {
