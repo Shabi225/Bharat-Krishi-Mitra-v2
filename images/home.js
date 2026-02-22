@@ -1,3 +1,4 @@
+
 /* ---------------- BACKGROUND AUDIO ---------------- */
 let voices = [];
 let voiceEnabled = false;
@@ -140,15 +141,6 @@ function scrollToAbout() {
   document.getElementById("menu").classList.remove("active");
 }
 
-/* ---------------- SCROLL TO CONTACT ---------------- */
-function scrollToContact() {
-  document.getElementById("contact").scrollIntoView({
-    behavior: "smooth"
-  });
-  document.getElementById("menu").classList.remove("active");
-}
-
-
 function scrollToHome() {
   window.scrollTo({
     top: 0,
@@ -178,7 +170,7 @@ window.addEventListener("scroll", () => {
     header.classList.remove("scrolled");
   }
 });
-
+;
 
 // -------- CAROUSEL (AUTO + ARROWS) --------
 var carouselTrack = null;
@@ -239,21 +231,3 @@ function restartAutoSlide() {
   if (carouselTimer) clearInterval(carouselTimer);
   startAutoSlide();
 }
-
-// AUTO WELCOME SPEECH FIX
-document.addEventListener('DOMContentLoaded', function() {
-  // Wait for voices to load completely
-  const welcomeInterval = setInterval(() => {
-    if (voices.length > 0) {
-      voiceEnabled = true;  // Auto-enable
-      speakWelcome();
-      clearInterval(welcomeInterval);
-      console.log("✅ Welcome speech triggered");
-    }
-  }, 300);
-  
-  // Stop checking after 5 seconds
-  setTimeout(() => clearInterval(welcomeInterval), 5000);
-});
-
-

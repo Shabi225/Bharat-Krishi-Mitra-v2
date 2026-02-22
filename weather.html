@@ -9,7 +9,7 @@
   function googleTranslateElementInit() {
     new google.translate.TranslateElement({
       pageLanguage: 'hi',
-      includedLanguages: 'en,hi,bn,mr,te,ta,gu,ur,kn,or,ml,pa,as',
+      includedLanguages: 'en,hi,bn',
       layout: google.translate.TranslateElement.InlineLayout.DROPDOWN,
       multilanguagePage: true
     }, 'google_translate_element');
@@ -39,37 +39,11 @@
       </div>
     </div>
     
-    <div id="google_translate_element" style="display: none;"></div>
-    <div class="lang-section" style="margin-left: auto;">
-      <select id="language" onchange="changeLanguage(this.value)" style="padding: 5px; border-radius: 5px; border: 1px solid #ccc; background: white;">
-        <option value="hi">हिन्दी (Hindi)</option>
-        <option value="en">English</option>
-        <option value="bn">বাংলা (Bengali)</option>
-        <option value="mr">मराठी (Marathi)</option>
-        <option value="te">తెలుగు (Telugu)</option>
-        <option value="ta">தமிழ் (Tamil)</option>
-        <option value="gu">ગુજરાતી (Gujarati)</option>
-        <option value="ur">اردू (Urdu)</option>
-        <option value="kn">ಕನ್ನಡ (Kannada)</option>
-        <option value="or">ଓଡ଼ିଆ (Oriya)</option>
-        <option value="ml">മലയാളം (Malayalam)</option>
-        <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
-        <option value="as">অসমীয়া (Assamese)</option>
-      </select>
-    </div>
+    <div id="google_translate_element" class="lang-dropdown"></div>
   </nav>
 
-</header>
 
-<script>
-function changeLanguage(langCode) {
-    const combo = document.querySelector('.goog-te-combo');
-    if (combo) {
-        combo.value = langCode;
-        combo.dispatchEvent(new Event('change'));
-    }
-}
-</script>
+</header>
 
 <div class="container">
 
