@@ -5,9 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sign In</title>
 <link rel="stylesheet" href="./styles/signin.css">
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'hi',
+    includedLanguages: 'en,hi,bn,mr,te,ta,gu,ur,kn,or,ml,pa,as',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+    autoDisplay: false
+  }, 'google_translate_element');
+}
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 
 <body>
+
+<div id="google_translate_element" style="display: none;"></div>
+<div style="position: absolute; top: 10px; right: 10px; z-index: 1000;">
+    <select id="language" onchange="changeLanguage(this.value)" style="padding: 5px; border-radius: 5px; border: 1px solid #ccc; background: white;">
+      <option value="hi">हिन्दी (Hindi)</option>
+      <option value="en">English</option>
+      <option value="bn">বাংলা (Bengali)</option>
+      <option value="mr">मराठी (Marathi)</option>
+      <option value="te">తెలుగు (Telugu)</option>
+      <option value="ta">தமிழ் (Tamil)</option>
+      <option value="gu">ગુજરાતી (Gujarati)</option>
+      <option value="ur">اردू (Urdu)</option>
+      <option value="kn">ಕನ್ನಡ (Kannada)</option>
+      <option value="or">ଓଡ଼ିଆ (Oriya)</option>
+      <option value="ml">മലയാളം (Malayalam)</option>
+      <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+      <option value="as">অসমীয়া (Assamese)</option>
+    </select>
+</div>
 
 <div class="container">
 
@@ -15,10 +45,10 @@
 
         <h2>Sign In</h2>
 
-        <form>
+        <form id="loginForm">
 
-            <input type="text" placeholder="Enter Username" required>
-            <input type="password" placeholder="Enter Password" required>
+            <input type="text" id="loginKey" placeholder="Enter Email or Mobile" required>
+            <input type="password" id="password" placeholder="Enter Password" required>
 
             <button type="submit">Login</button>
 
@@ -34,6 +64,41 @@
     </div>
 
 </div>
+
+<script>
+function changeLanguage(langCode) {
+    const combo = document.querySelector('.goog-te-combo');
+    if (combo) {
+        combo.value = langCode;
+        combo.dispatchEvent(new Event('change'));
+    }
+}
+
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const loginKey = document.getElementById('loginKey').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        const response = await fetch('./api/auth/signin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ loginKey, password })
+        });
+        const data = await response.json();
+        if (response.ok) {
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
+            window.location.href = 'index.html'; // Adjust as per your home page
+        } else {
+            alert(data.message || 'Login failed');
+        }
+    } catch (err) {
+        console.error(err);
+        alert('Error during login');
+    }
+});
+</script>
 
 </body>
 </html>

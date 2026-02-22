@@ -4,24 +4,28 @@ let currentPage = 1;
 const CARDS_PER_PAGE = 6;
 
 async function loadSchemes() {
+  console.log('Fetching schemes from database...');
   try {
-    const response = await fetch('schemes.JSON');
+    const response = await fetch('./api/schemes');
     const data = await response.json();
+    console.log('Data received from API:', data);
     allSchemes = data.schemes || [];
     if (allSchemes.length > 0) {
       renderCards(allSchemes);
     } else {
-      document.getElementById('schemesGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:#666;">कोई योजना नहीं मिली</div>';
+      console.warn('No schemes found in the data received');
+      document.getElementById('schemesGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:#666;">कोई योजना नहीं मिली (Data Seed करें)</div>';
     }
-    console.log('✅ Schemes loaded:', allSchemes.length);
+    console.log('✅ Schemes processed:', allSchemes.length);
   } catch (e) {
-    console.error('❌ JSON load failed:', e);
-    document.getElementById('schemesGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:#666;">JSON लोड नहीं हो सका</div>';
+    console.error('❌ DB load failed:', e);
+    document.getElementById('schemesGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:#666;">डेटाबेस से लोड नहीं हो सका</div>';
   }
 }
 
 
 function renderCards(schemes = [], page = currentPage) {
+  console.log('Rendering cards for schemes:', schemes.length, 'Page:', page);
 
   if (!Array.isArray(schemes) || schemes.length === 0) {
     document.getElementById('schemesGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:#666;">कोई योजना नहीं मिली</div>';
@@ -163,6 +167,13 @@ function closeDetail() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    alert('Please sign in to view the schemes.');
+    window.location.href = 'signin.html';
+    return;
+  }
+
   loadSchemes();
   
   document.addEventListener('keydown', function(e) {
