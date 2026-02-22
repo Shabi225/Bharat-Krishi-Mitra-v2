@@ -33,24 +33,14 @@ document.addEventListener("click", function (event) {
 
 /* ---------------- HERO TEXT LANGUAGE ---------------- */
 function updateHeroText() {
-  const lang = document.getElementById("language").value;
-
-  const content = {
-    "hi-IN": {
-      title: "किसानों का डिजिटल साथी",
-      line1: "खेती से जुड़ी हर ज़रूरी जानकारी अब आपकी उंगलियों पर",
-      line2: "सरकारी योजनाएँ, मौसम अपडेट और स्मार्ट खेती समाधान",
-      line3: "आज ही भारत कृषि मित्र से जुड़ें और खेती को भविष्य के लिए तैयार करें 🌾"
-    },
-    "en-US": {
-      title: "The Digital Companion for Farmers",
-      line1: "All essential farming information at your fingertips",
-      line2: "Government schemes, weather updates, and smart farming insights",
-      line3: "Join Bharat Krishi Mitra today and take farming into the future 🌱"
-    }
+  // We use Hindi as the base. 
+  // Google Translate will then translate this into English, Marathi, etc.
+  const text = {
+    title: "किसानों का डिजिटल साथी",
+    line1: "खेती से जुड़ी हर ज़रूरी जानकारी अब आपकी उंगलियों पर",
+    line2: "सरकारी योजनाएँ, मौसम अपडेट और स्मार्ट खेती समाधान",
+    line3: "आज ही भारत कृषि मित्र से जुड़ें और खेती को भविष्य के लिए तैयार करें 🌾"
   };
-
-  const text = content[lang] || content["hi-IN"];
 
   document.getElementById("hero-title").innerText = text.title;
   document.getElementById("hero-line1").innerText = text.line1;
@@ -58,15 +48,32 @@ function updateHeroText() {
   document.getElementById("hero-line3").innerText = text.line3;
 
   replayHeroAnimation();
-  if (voiceEnabled) {
-    setTimeout(() => {
-      speakText(text.line3, lang);
-    }, 1800);
-  }
 }
+
+function changeLanguage(langCode) {
+    // 1. Reset the UI to Hindi base
+    updateHeroText();
+    
+    // 2. Trigger the Google Translate engine
+    // We use a small interval to wait if the engine isn't ready yet
+    const checkEngine = setInterval(() => {
+        const combo = document.querySelector('.goog-te-combo');
+        if (combo) {
+            combo.value = langCode;
+            combo.dispatchEvent(new Event('change'));
+            clearInterval(checkEngine);
+            console.log("✅ Translation triggered for:", langCode);
+        }
+    }, 100);
+
+    // Stop checking after 5 seconds
+    setTimeout(() => clearInterval(checkEngine), 5000);
+}
+
 /* ---------------- HERO ANIMATION RESET ---------------- */
 function replayHeroAnimation() {
   const hero = document.getElementById("heroBox");
+  if (!hero) return;
   hero.classList.remove("hero-animate");
   void hero.offsetWidth; // force reflow
   hero.classList.add("hero-animate");
@@ -116,13 +123,15 @@ function speakText(text, lang) {
 function speakSignup() {
   if (!voiceEnabled || signupSpoken) return;
 
-  const lang = document.getElementById("language").value;
+  const langElement = document.getElementById("language");
+  const lang = langElement ? langElement.value : "hi";
+  
   const messages = {
-    "hi-IN": "साइन अप करें",
-    "en-US": "Sign up"
+    "hi": "साइन अप करें",
+    "en": "Sign up"
   };
 
-  speakText(messages[lang] || messages["hi-IN"], lang);
+  speakText(messages[lang] || messages["hi"], lang === 'en' ? 'en-US' : 'hi-IN');
   signupSpoken = true;
 }
 
@@ -242,6 +251,8 @@ function restartAutoSlide() {
 
 // AUTO WELCOME SPEECH FIX
 document.addEventListener('DOMContentLoaded', function() {
+  updateAuthStatus();
+
   // Wait for voices to load completely
   const welcomeInterval = setInterval(() => {
     if (voices.length > 0) {
@@ -255,5 +266,34 @@ document.addEventListener('DOMContentLoaded', function() {
   // Stop checking after 5 seconds
   setTimeout(() => clearInterval(welcomeInterval), 5000);
 });
+
+function updateAuthStatus() {
+  const token = localStorage.getItem('token');
+  const user = JSON.parse(localStorage.getItem('user'));
+  const authBtn = document.getElementById('authBtn');
+  const schemesLink = document.getElementById('schemesLink');
+
+  if (token && user) {
+    if (authBtn) {
+      authBtn.textContent = 'Logout';
+      authBtn.onclick = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.reload();
+      };
+    }
+    if (schemesLink) {
+      schemesLink.style.display = 'block';
+    }
+    // Update welcome message if user is logged in
+    setTimeout(() => {
+      speakText(`Welcome back, ${user.fullName}`, 'en-US');
+    }, 1000);
+  } else {
+    if (schemesLink) {
+      schemesLink.style.display = 'none';
+    }
+  }
+}
 
 

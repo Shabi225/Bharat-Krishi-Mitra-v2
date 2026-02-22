@@ -7,6 +7,17 @@
   
   
   <link rel="stylesheet" href="./styles/home.css">
+  <script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'hi',
+      includedLanguages: 'en,hi,bn,mr,te,ta,gu,ur,kn,or,ml,pa,as',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
+  </script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
  
   <script defer src="./home.js"></script>
 </head>
@@ -20,18 +31,29 @@
   </div>
 
   <div class="header-right">
-  <button class="signup-btn"
+  <button id="authBtn" class="signup-btn"
         onclick="enableVoice(); speakSignup(); window.location.href='./signin.html';"
         onmouseenter="speakSignup()"
         onmouseleave="resetSignupVoice()">
-  Sign Up
+  Sign In
   </button>
 
 
-    <select id="language" onchange="updateHeroText()">
-      <option value="hi-IN">हिन्दी</option>
-      <option value="en-US">English</option>
-      <option value="bn-IN">বাংলা</option>
+    <div id="google_translate_element" style="display: none;"></div>
+    <select id="language" onchange="changeLanguage(this.value)">
+      <option value="hi">हिन्दी (Hindi)</option>
+      <option value="en">English</option>
+      <option value="bn">বাংলা (Bengali)</option>
+      <option value="mr">मराठी (Marathi)</option>
+      <option value="te">తెలుగు (Telugu)</option>
+      <option value="ta">தமிழ் (Tamil)</option>
+      <option value="gu">ગુજરાતી (Gujarati)</option>
+      <option value="ur">اردू (Urdu)</option>
+      <option value="kn">ಕನ್ನಡ (Kannada)</option>
+      <option value="or">ଓଡ଼ିଆ (Oriya)</option>
+      <option value="ml">മലയാളം (Malayalam)</option>
+      <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+      <option value="as">অসমীয়া (Assamese)</option>
     </select>
 
    
@@ -44,7 +66,7 @@
 <div class="menu-panel" id="menu">
   <a href="#" onclick="scrollToHome()">🏠 Home</a>
   <a href="#" onclick="scrollToAbout()">ℹ️ About</a>
-  <a href="schemes.html">📜 Schemes</a>
+  <a href="schemes.html" id="schemesLink" style="display: none;">📜 Schemes</a>
   <a href="weather.html">🌦 Weather Update</a>
   <a href="#" onclick="scrollToContact()">☎ Contact Us</a>
 </div>
@@ -78,21 +100,20 @@
   <div class="about-box">
     <!-- LEFT TEXT -->
     <div class="about-left">
-      <h2>For Every Indian Farmer 🌾</h2>
+      <h2>हर भारतीय किसान के लिए 🌾</h2>
       <p>
-        Farming is not just work — it’s a way of life.
-        Bharat Krishi Mitra stands beside you with trusted,
-        simple and timely farming guidance.
+        खेती सिर्फ काम नहीं है - यह जीवन जीने का एक तरीका है।
+        भारत कृषि मित्र भरोसेमंद, सरल और समय पर खेती के मार्गदर्शन के साथ आपके साथ खड़ा है।
       </p>
 
       <p>
-        From weather alerts to government schemes,
-        from smart techniques to local language support —
-        everything is built for <strong>you</strong>.
+        मौसम के अलर्ट से लेकर सरकारी योजनाओं तक,
+        स्मार्ट तकनीकों से लेकर स्थानीय भाषा समर्थन तक -
+        सब कुछ <strong>आपके</strong> लिए बनाया गया है।
       </p>
 
       <p class="about-highlight">
-        Smart farming starts with the right information.
+        स्मार्ट खेती सही जानकारी के साथ शुरू होती है।
       </p>
     </div>
 
@@ -125,28 +146,28 @@
   <div class="footer-container">
     <!-- LEFT: About -->
     <div class="footer-about">
-      <h3>Bharat Krishi Mitra</h3>
+      <h3>भारत कृषि मित्र</h3>
       <p>
-        Providing trusted guidance to Indian farmers 🌾.  
-        From weather alerts to smart farming tips, everything you need is here.
+        भारतीय किसानों को भरोसेमंद मार्गदर्शन प्रदान करना 🌾।
+        मौसम अलर्ट से लेकर स्मार्ट खेती के सुझावों तक, आपकी ज़रूरत की हर चीज़ यहाँ है।
       </p>
     </div>
 
     <!-- CENTER: Quick Links -->
     <div class="footer-links">
-      <h3>Quick Links</h3>
+      <h3>त्वरित लिंक</h3>
       <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#">Schemes</a></li>
-        <li><a href="weather.html">Weather Update</a></li>
-        <li><a href="#">Contact Us</a></li>
+        <li><a href="#home" onclick="scrollToHome()">होम</a></li>
+        <li><a href="#about" onclick="scrollToAbout()">हमारे बारे में</a></li>
+        <li><a href="schemes.html">योजनाएँ</a></li>
+        <li><a href="weather.html">मौसम अपडेट</a></li>
+        <li><a href="#contact" onclick="scrollToContact()">संपर्क करें</a></li>
       </ul>
     </div>
 
     <!-- RIGHT: Contact & Social -->
     <div class="footer-contact">
-      <h3>Contact Us</h3>
+      <h3>संपर्क करें</h3>
       <p>📞 +91 98765 43210</p>
       <p>✉️ info@bharatkrishimitra.com</p>
       <div class="footer-social">
@@ -158,7 +179,7 @@
   </div>
 
   <div class="footer-bottom">
-    &copy; 2026 Bharat Krishi Mitra. All Rights Reserved.
+    &copy; 2026 भारत कृषि मित्र। सर्वाधिकार सुरक्षित।
   </div>
 </footer>
 
