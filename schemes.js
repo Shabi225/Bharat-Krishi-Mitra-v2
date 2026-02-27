@@ -195,9 +195,3 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// Force native lang refresh after load
-setTimeout(() => {
-  const combo = document.querySelector('.goog-te-combo');
-  if (combo) combo.dispatchEvent(new Event('change'));
-}, 2000);
-

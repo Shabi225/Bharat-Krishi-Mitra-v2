@@ -8,12 +8,11 @@
 
   function googleTranslateElementInit() {
     new google.translate.TranslateElement({
-      pageLanguage: 'hi',           // Hindi base = native labels
-      includedLanguages: 'en,hi,bn,mr,te,ta,gu,ur,kn,or,ml,pa,as', // Expanded Indian Languages
+      pageLanguage: 'hi',
+      includedLanguages: 'en,hi,bn,mr,te,ta,gu,ur,kn,or,ml,pa,as',
       layout: google.translate.TranslateElement.InlineLayout.DROPDOWN,
-      gaTrack: true,
-      gaId: 'UA-XXXXX-Y',           // Optional
-      multilanguagePage: true       // Native lang names ON
+      autoDisplay: false,
+      multilanguagePage: true
     }, 'google_translate_element')
   }
   </script>
@@ -22,7 +21,7 @@
   <link rel="stylesheet" href="./styles/schemes.css">
  
   <script src="./schemes.js"></script>
-
+  <script defer src="./voice-assistant.js"></script>
 </head>
 <body>
 <!-- Add to top of <body>, before schemes-container -->
@@ -72,11 +71,16 @@
 
 <script>
 function changeLanguage(langCode) {
-    const combo = document.querySelector('.goog-te-combo');
-    if (combo) {
-        combo.value = langCode;
-        combo.dispatchEvent(new Event('change'));
-    }
+    const checkEngine = setInterval(() => {
+        const combo = document.querySelector('.goog-te-combo');
+        if (combo) {
+            combo.value = langCode;
+            combo.dispatchEvent(new Event('change'));
+            clearInterval(checkEngine);
+            console.log("✅ Translation triggered for:", langCode);
+        }
+    }, 100);
+    setTimeout(() => clearInterval(checkEngine), 5000);
 }
 </script>
 
