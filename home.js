@@ -33,6 +33,14 @@ document.addEventListener("click", function (event) {
 
 /* ---------------- HERO TEXT LANGUAGE ---------------- */
 function updateHeroText() {
+  // If the page is currently being translated by Google, don't overwrite with Hindi base
+  if (document.documentElement.classList.contains('translated-ltr') || 
+      document.documentElement.classList.contains('translated-rtl') ||
+      document.querySelector('.goog-te-menu-value span:first-child')?.textContent !== 'Select Language') {
+      console.log("Skipping hero text update: Translation active");
+      return;
+  }
+
   // We use Hindi as the base. 
   // Google Translate will then translate this into English, Marathi, etc.
   const text = {
@@ -78,7 +86,9 @@ function replayHeroAnimation() {
 
 
 /* INIT TEXT */
-updateHeroText();
+if (!document.getElementById("hero-title").innerText.trim()) {
+    updateHeroText();
+}
 
 /* ---------------- SPEECH ---------------- */
 
