@@ -51,9 +51,6 @@ function updateHeroText() {
 }
 
 function changeLanguage(langCode) {
-    // 1. Reset the UI to Hindi base
-    updateHeroText();
-    
     // 2. Trigger the Google Translate engine
     // We use a small interval to wait if the engine isn't ready yet
     const checkEngine = setInterval(() => {

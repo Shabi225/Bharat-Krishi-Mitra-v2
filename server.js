@@ -16,10 +16,34 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
+// Mongoose Debug Settings
+mongoose.set('bufferCommands', true); // Re-enable buffering
+mongoose.set('debug', true);
+
 // Database Connection
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('✅ MongoDB Connected'))
-  .catch(err => console.error('❌ MongoDB Connection Error:', err));
+const connectDB = async () => {
+  console.log('--- Connecting to MongoDB... ---');
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 10000,
+      socketTimeoutMS: 45000,
+      family: 4, // Forced to IPv4 for connectivity
+    });
+    console.log('✅ MongoDB Connected');
+    
+    // Start server ONLY after DB is connected
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, '::', () => console.log(`🚀 Server running on port ${PORT} (Dual Stack IPv4/IPv6)`));
+    
+  } catch (err) {
+    console.error('❌ MongoDB Connection Error:', err.message);
+    console.log('💡 TIP: If you see ECONNREFUSED, your ISP is blocking SRV.');
+    console.log('FIX: Use the non-SRV connection string in your .env file.');
+    process.exit(1); // Exit if we can't connect at startup
+  }
+};
+
+connectDB();
 
 // --- Auth Routes ---
 
@@ -114,5 +138,6 @@ app.get('/api/schemes/seed', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+// Remove this: it's now handled inside connectDB()
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, '::', () => console.log(`🚀 Server running on port ${PORT} (Dual Stack IPv4/IPv6)`));
