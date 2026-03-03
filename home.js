@@ -34,9 +34,12 @@ document.addEventListener("click", function (event) {
 /* ---------------- HERO TEXT LANGUAGE ---------------- */
 function updateHeroText() {
   // If the page is currently being translated by Google, don't overwrite with Hindi base
-  if (document.documentElement.classList.contains('translated-ltr') || 
-      document.documentElement.classList.contains('translated-rtl') ||
-      document.querySelector('.goog-te-menu-value span:first-child')?.textContent !== 'Select Language') {
+  const googleTranslateActive = document.documentElement.classList.contains('translated-ltr') || 
+                                document.documentElement.classList.contains('translated-rtl') ||
+                                (document.querySelector('.goog-te-menu-value span:first-child')?.textContent && 
+                                 document.querySelector('.goog-te-menu-value span:first-child').textContent !== 'Select Language');
+
+  if (googleTranslateActive) {
       console.log("Skipping hero text update: Translation active");
       return;
   }
@@ -50,17 +53,21 @@ function updateHeroText() {
     line3: "आज ही भारत कृषि मित्र से जुड़ें और खेती को भविष्य के लिए तैयार करें 🌾"
   };
 
-  document.getElementById("hero-title").innerText = text.title;
-  document.getElementById("hero-line1").innerText = text.line1;
-  document.getElementById("hero-line2").innerText = text.line2;
-  document.getElementById("hero-line3").innerText = text.line3;
+  const titleEl = document.getElementById("hero-title");
+  const l1El = document.getElementById("hero-line1");
+  const l2El = document.getElementById("hero-line2");
+  const l3El = document.getElementById("hero-line3");
+
+  if (titleEl) titleEl.innerText = text.title;
+  if (l1El) l1El.innerText = text.line1;
+  if (l2El) l2El.innerText = text.line2;
+  if (l3El) l3El.innerText = text.line3;
 
   replayHeroAnimation();
 }
 
 function changeLanguage(langCode) {
-    // 2. Trigger the Google Translate engine
-    // We use a small interval to wait if the engine isn't ready yet
+    // Trigger the Google Translate engine
     const checkEngine = setInterval(() => {
         const combo = document.querySelector('.goog-te-combo');
         if (combo) {
@@ -276,9 +283,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function updateAuthStatus() {
   const token = localStorage.getItem('token');
-  const user = JSON.parse(localStorage.getItem('user'));
+  const userStr = localStorage.getItem('user');
+  let user = null;
+  
+  try {
+    if (userStr) user = JSON.parse(userStr);
+  } catch (e) {
+    console.error("Auth status parse error:", e);
+  }
+
   const authBtn = document.getElementById('authBtn');
   const schemesLink = document.getElementById('schemesLink');
+
+  if (schemesLink) {
+    schemesLink.style.display = 'block';
+  }
 
   if (token && user) {
     if (authBtn) {
@@ -289,16 +308,11 @@ function updateAuthStatus() {
         window.location.reload();
       };
     }
-    if (schemesLink) {
-      schemesLink.style.display = 'block';
-    }
     // Update welcome message if user is logged in
     setTimeout(() => {
-      speakText(`Welcome back, ${user.fullName}`, 'en-US');
+      if (user && user.fullName) {
+        speakText(`Welcome back, ${user.fullName}`, 'en-US');
+      }
     }, 1000);
-  } else {
-    if (schemesLink) {
-      schemesLink.style.display = 'none';
-    }
   }
 }

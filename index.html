@@ -64,11 +64,26 @@
   </div>
 </header>
 
+<script>
+function changeLanguage(langCode) {
+    const checkEngine = setInterval(() => {
+        const combo = document.querySelector('.goog-te-combo');
+        if (combo) {
+            combo.value = langCode;
+            combo.dispatchEvent(new Event('change'));
+            clearInterval(checkEngine);
+            console.log("✅ Translation triggered for:", langCode);
+        }
+    }, 100);
+    setTimeout(() => clearInterval(checkEngine), 5000);
+}
+</script>
+
 <!-- MENU -->
 <div class="menu-panel" id="menu">
   <a href="#" onclick="scrollToHome()">🏠 Home</a>
   <a href="#" onclick="scrollToAbout()">ℹ️ About</a>
-  <a href="schemes.html" id="schemesLink" style="display: none;">📜 Schemes</a>
+  <a href="schemes.html" id="schemesLink">📜 Schemes</a>
   <a href="weather.html">🌦 Weather Update</a>
   <a href="#" onclick="scrollToContact()">☎ Contact Us</a>
 </div>

@@ -167,13 +167,6 @@ function closeDetail() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  const token = localStorage.getItem('token');
-  if (!token) {
-    alert('Please sign in to view the schemes.');
-    window.location.href = 'signin.html';
-    return;
-  }
-
   loadSchemes();
   
   document.addEventListener('keydown', function(e) {

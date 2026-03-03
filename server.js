@@ -23,8 +23,9 @@ mongoose.set('debug', true);
 // Database Connection
 const connectDB = async () => {
   console.log('--- Connecting to MongoDB... ---');
+  const dbUri = process.env.APP_MONGODB_URI || process.env.MONGODB_URI;
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
+    await mongoose.connect(dbUri, {
       serverSelectionTimeoutMS: 10000,
       socketTimeoutMS: 45000,
       family: 4, // Forced to IPv4 for connectivity
